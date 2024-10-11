@@ -1,0 +1,14 @@
+﻿@inherits JWTExpireComponentModel
+
+
+<div>
+    <b>@Show()</b>
+</div>
+
+@code {
+
+    private string Show()
+    {
+        return $"{(User.AccessTokenExpire - DateTime.UtcNow < TimeSpan.Zero ? TimeSpan.Zero : User.AccessTokenExpire - DateTime.UtcNow):hh\\:mm\\:ss}";
+    }
+}

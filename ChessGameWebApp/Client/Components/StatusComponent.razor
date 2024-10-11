@@ -1,0 +1,20 @@
+﻿@using ChessGame
+@using ChessGameWebApp.Client.Components
+
+@inherits StatusComponentModel
+
+<div>
+    <div>
+        <TimerComponent Player="@Board.Players.First(p => p != Board.Player)"></TimerComponent>
+    </div>
+    <div>
+        <b>@Status</b>
+    </div>
+    <div>
+        <TimerComponent Player="@Board.Players.First(p => p == Board.Player)"></TimerComponent>
+    </div>
+</div>
+
+@code {
+
+}

@@ -1,0 +1,35 @@
+﻿@using ChessGameClient.Models;
+@using ChessGameWebApp.Client.Components
+@inherits LayoutComponentBase
+@inject SiteUserInfo User
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+            <NavLink>@(User.Id > 0 ? User.Name : "Guest")</NavLink>
+            @if (User.Id > 0)
+            {
+                <NavLink class="btn btn-primary" href="logout">Sign Out</NavLink>
+                <JWTExpireComponent></JWTExpireComponent>
+            }
+            else
+            {
+                <NavLink class="btn btn-primary" href="authorization/auth">Sign In</NavLink>
+                <NavLink class="btn btn-primary" href="authorization/reg">Sign Up</NavLink>
+            }
+        </div>
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+
+@code
+{
+    string UserName { get; set; }
+}

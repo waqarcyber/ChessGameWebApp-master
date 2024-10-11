@@ -1,0 +1,19 @@
+﻿.messagesList {
+    overflow: scroll;
+    overflow: auto;
+    height: 100px;
+    scroll-behavior: smooth;
+}
+
+ul {
+    list-style: none;
+}
+
+
+li button {
+    visibility: hidden;
+}
+
+li:hover button {
+    visibility:visible;
+}

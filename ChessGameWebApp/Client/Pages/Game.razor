@@ -1,0 +1,41 @@
+﻿@page "/game/{StartGame?}"
+@using ChessGameClient.AuthWebAPI;
+@using ChessGameClient.Models;
+@using ChessGameWebApp.Client.Components
+@using Microsoft.AspNetCore.SignalR.Client
+@using ChessGameClient
+@inject SiteUserInfo userInfo
+@inject IAuthWebApi Auth
+@inject NavigationManager NavigationManager
+
+@code {
+
+    [Parameter]
+    public string? StartGame { get; set; }
+
+    private bool sessionExists = false;
+    protected override async Task OnInitializedAsync()
+    {
+        if (userInfo.Id > 0 && StartGame != "start")
+        {
+            sessionExists = await Auth.SessionExists();
+            
+            if (sessionExists)
+                NavigationManager.NavigateTo("/Game/start");
+        }
+    }
+}
+
+@if (userInfo.Id > 0)
+{
+    @if (StartGame != "start")
+    {
+        <GoGameComponent></GoGameComponent>
+    }
+    else
+    {
+        <ChessBoardComponent></ChessBoardComponent>
+    }
+}
+
+

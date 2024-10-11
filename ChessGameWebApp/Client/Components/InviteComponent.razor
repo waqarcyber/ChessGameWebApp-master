@@ -1,0 +1,30 @@
+﻿@using ChessGameClient.Models;
+@using ChessGameClient.Services;
+@using ChessGameWebApp.Client.Services
+@inject SiteUserInfo User
+@implements IDisposable
+@inject IGameHubService gameHubService
+
+@code
+{
+    public async void Dispose()
+    {
+        await gameHubService.CloseInvite(User.RivalId);
+    }
+}
+<table>
+    <tr>
+        <td>
+            <div>@User.Username</div>
+            <div><GoGameComponent RandomRival="false"></GoGameComponent></div>
+        </td>
+        <td>
+            <div><b>VS</b></div>
+       </td>
+       
+       <td>
+           <div>@User.RivalName</div>
+           <div><GoGameComponent RandomRival="false" IsRival="true"></GoGameComponent></div>
+       </td>       
+   </tr>
+</table>

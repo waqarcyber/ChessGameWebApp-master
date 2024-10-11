@@ -1,0 +1,87 @@
+﻿@page "/adminPanel"
+@using ChessGameClient
+@using ChessGameClient.AuthWebAPI;
+@using Blazored.LocalStorage
+@using ChessGameClient.Models;
+@using ChessGameWebApp.Client.Services
+@inject IJSRuntime JsRuntime
+@inject IAuthWebApi authWebApi
+@inject NavigationManager navigationManager
+
+
+<h3>Admin Panel</h3>
+
+@code {
+
+    private string username = "";
+    private List<AccountDto> Accounts { get; set; }
+
+    async void FormSubmitted(EditContext editContext)
+    {
+        try
+        {
+            Accounts = await authWebApi.Search(username);
+            StateHasChanged();
+        }
+        catch(Exception ex)
+        {
+            await JsRuntime.InvokeVoidAsync("alert", ex.Message);
+        }
+    }
+
+    private async void BanAccount(string email)
+    {
+        try
+        { 
+            await authWebApi.BanOrUnban(email);
+
+            Accounts = await authWebApi.Search(username);
+            StateHasChanged();
+        }
+        catch(Exception ex)
+        {
+            await JsRuntime.InvokeVoidAsync("alert", ex.Message);
+        }
+       
+    }
+}
+
+<EditForm Model="@this" OnValidSubmit="@FormSubmitted">
+    <table>
+        <tr>
+            <td><label for="username">Enter username</label></td>
+            <td><input type="text" name="username" @bind-value="username" /></td>
+        </tr>
+            <tr>
+                <td>
+                    <input class="btn btn-primary" type="submit" value="search" />
+                </td>
+            </tr>
+      </table>
+</EditForm>
+
+@if (Accounts != null)
+{
+    <table class="info">
+    <tr>
+        <th>Id</th>
+        <th>Login</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Roles</th>
+        <th>Banned</th>
+    </tr>
+    
+    @foreach (var account in Accounts)
+    {
+        <tr>
+            <td>@account.Id</td>
+            <td>@account.Login</td>
+            <td>@account.Username</td>
+            <td>@account.Email</td>
+            <td>@account.ShowRoles()</td>
+            <td><button type="button" class="btn btn-primary" @onclick="() => BanAccount(account.Email)">@account.IsBanned</button></td>
+        </tr>
+    }
+    </table>
+}

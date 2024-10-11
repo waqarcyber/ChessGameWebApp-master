@@ -1,0 +1,38 @@
+﻿@using ChessGame
+@using ChessGameClient.Models
+@inject ChessBoard board
+@inject TimeUpdater updater
+@implements IChessObserver
+@implements IDisposable
+
+@code {
+    [Parameter]
+    public IPlayer Player { get; set; }
+
+    private string ShowValue()
+    {
+        return $"{Player.Timer.Value:hh\\:mm\\:ss}";
+    }
+
+    protected override void OnInitialized()
+    {
+        ((IChessObservable)updater).Subscribe(this);
+    }
+
+    public Task UpdateAsync()
+    {
+        if (board.СhessСlock.IsGameOver())
+            board.UpdateGameStatus();
+
+        StateHasChanged();
+
+        return Task.CompletedTask;
+    }
+
+    public void Dispose()
+    {
+        ((IChessObservable)updater).Remove(this);
+    }
+}
+
+<b>@ShowValue()</b>

@@ -1,0 +1,46 @@
+﻿@using ChessGame
+@inherits GameComponentModel
+
+@if (Inversion)
+{
+    <table>
+        @for (int i = -1; i < 8; i++)
+        {
+            <tr>
+                @for (int j = -1; j < 8; j++)
+                {
+                    @if (i == -1 || j == -1)
+                    {
+                        <BorderComponent Row="@i" Column="@j" Reverse="true"></BorderComponent>
+                    }
+                    else
+                    {
+
+                        <CellComponent Row="@(7 - i)" Column="@(7 - j)" ParentComponent="@this" ChessCell="@Board.GetCell((7 - i), (7 - j))" ></CellComponent>
+                    }
+                }
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <table>
+        @for (int i = -1; i < 8; i++)
+        {
+            <tr>
+                @for (int j = -1; j < 8; j++)
+                {
+                    @if (i == -1 || j == -1)
+                    {
+                        <BorderComponent Row="@i" Column="@j"></BorderComponent>
+                    }
+                    else
+                    {
+                        <CellComponent Row="@i" Column="@j" ParentComponent="@this" ChessCell="@Board.GetCell(i, j)" ></CellComponent>
+                    }
+                }
+            </tr>
+        }
+    </table>
+}

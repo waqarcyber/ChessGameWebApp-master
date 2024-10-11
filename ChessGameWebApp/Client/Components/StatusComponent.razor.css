@@ -1,0 +1,10 @@
+﻿div {
+    height: 50px;
+    width: 700px;
+    text-align: center;
+    color: saddlebrown;
+    font-weight: bold;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+}

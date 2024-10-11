@@ -1,0 +1,11 @@
+﻿@using ChessGameClient
+@using ChessGameWebApp.Client.Services
+@inherits GoGameComponentModel
+
+
+<input class="btn btn-primary @(!PlayerStatus ? "" : "red")" type="button" value="@(!PlayerStatus ? "Start" : "Stop")" @onclick="StartGame"/>
+
+
+@code {
+
+}

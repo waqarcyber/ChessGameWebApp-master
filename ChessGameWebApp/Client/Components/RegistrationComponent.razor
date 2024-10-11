@@ -1,0 +1,70 @@
+﻿@using ChessGameClient.AuthWebAPI;
+@inherits RegistrationComponentModel
+@inject IAuthWebApi webApi
+@inject IJSRuntime JsRuntime
+@inject NavigationManager navigationManager
+
+<h3>Registration</h3>
+
+@code {
+    async void FormSubmitted(EditContext editContext)
+    {
+        bool result = await webApi.Registration(new AccountRequestModel()
+        {
+            Username = Username,
+            Login = Login,
+            Password = Password,
+            Email = Email
+        });
+
+        if (result)
+        {
+            await JsRuntime.InvokeVoidAsync("alert", $"Registration is successfully");
+            navigationManager.NavigateTo("/authorization/auth");
+        }
+        else
+        {
+            await JsRuntime.InvokeVoidAsync("alert", $"same login, email or username already exist");
+        }
+    }
+}
+
+<EditForm Model="@this" OnValidSubmit="@FormSubmitted">
+    <DataAnnotationsValidator />
+    <table>
+        <tr>
+            <td><label for="login">Login</label></td>
+            <td><input type="text" name="login" @bind-value="Login"/></td>
+            <ValidationMessage For=@(() => Login) />
+
+            </tr>
+            <tr>
+                <td><label for="username">Username</label></td>
+                <td><input type="text" name="username" @bind-value="Username"/></td>
+                <ValidationMessage For=@(() => Username) />
+
+            </tr>
+            <tr>
+                <td><label for="email">E-mail</label></td>
+                <td><input type="text" name="email" @bind-value="Email"/></td>
+                <ValidationMessage For=@(() => Email) />
+
+            </tr>
+            <tr>
+                <td><label for="password">Password</label></td>
+                <td><input type="password" name="password" @bind-value="Password"/></td>
+                <ValidationMessage For=@(() => Password) />
+            </tr>
+            <tr>
+                <td><label for="confirm">Confirm</label></td>
+                <td><input type="password" name="confirm" @bind-value="Confirm"/></td>
+                <ValidationMessage For=@(() => Confirm) />
+            </tr>
+            <tr>
+                <td>
+                    <NavLink class="btn btn-secondary" href="authorization/auth">Login</NavLink>
+                    <input class="btn btn-primary" type="submit" value="Register" />
+                </td>
+            </tr>
+      </table>
+</EditForm>

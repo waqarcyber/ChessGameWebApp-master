@@ -1,0 +1,16 @@
+﻿td {
+    text-align: center;
+    background-color: sandybrown;
+    color: saddlebrown;
+    font-weight: bold;
+    font-size: 1rem;
+}
+.vertical {
+    width: 4%;
+    border-right: 1px solid;
+}
+
+.horizontal {
+    height: 4%;
+    border-bottom: 1px solid;
+}

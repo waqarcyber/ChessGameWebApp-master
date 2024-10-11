@@ -1,0 +1,9 @@
+﻿.info td {
+    border: 1px solid grey;
+    width: 200px;
+    text-align: center;
+}
+
+.info th {
+    text-align: center;
+}

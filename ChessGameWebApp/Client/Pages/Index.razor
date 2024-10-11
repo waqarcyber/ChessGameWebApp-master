@@ -1,0 +1,14 @@
+﻿@page "/"
+@using ChessGameClient.Models;
+@using ChessGameWebApp.Client.Components
+@inject SiteUserInfo userInfo
+
+
+@if (userInfo.Id > 0)
+{
+    <ChatComponent></ChatComponent>
+}
+
+@code {
+
+}

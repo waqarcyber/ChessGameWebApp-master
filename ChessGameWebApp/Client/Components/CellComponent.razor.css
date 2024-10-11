@@ -1,0 +1,49 @@
+﻿td {
+    height: 12%;
+    width: 12%;
+    border-color: sandybrown;
+    border: 1px solid;
+}
+
+.target {
+    background-color: firebrick;
+    border-color: inherit;
+}
+
+.pointer {
+    background-color: deepskyblue;
+    border-color: inherit;
+}
+
+.free {
+    background-color: lightseagreen;
+    border-color: inherit;
+}
+
+.white {
+    background-color: sandybrown;
+    border-color: inherit;
+}
+
+.black {
+    background-color: saddlebrown;
+    border-color: inherit;
+}
+
+.help {
+    background-color: orangered;
+    border-color: inherit;
+}
+
+td:hover {
+    background-color: #1b6ec2;
+    border-color: inherit;
+}
+
+img {
+    width: 80%;
+    height: 80%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

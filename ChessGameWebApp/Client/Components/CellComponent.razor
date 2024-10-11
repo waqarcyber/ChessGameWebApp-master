@@ -1,0 +1,17 @@
+﻿@using ChessGameClient;
+@using ChessGame
+@using ChessGameClient.AuthWebAPI;
+@inherits CellComponentModel
+@inject GameHttpClient Http
+
+@code {
+
+}
+
+<td class="@(IsHelp ? "help" : IsPointer ? "pointer" : IsMarked ? (FigureName is null ? "free" : "target") : (Row % 2 == Column % 2 ? "white" : "black"))" onclick="@Click">
+    @if (FigureName != null)
+    {
+        string str = $"/css/icons/{ChessCell.FigureName}.png";
+        <img src="@str"  alt="" />
+    }
+</td>

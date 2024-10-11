@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Castle.Windsor" Version="5.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.1" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.22.0" />
+    <PackageReference Include="System.Net.Http.Json" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ChessGame\ChessGame.csproj" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="copy &quot;D:\Users\turbo\Documents\Projects\ChessGameWebApp\ChessWebAPI\bin\Debug\netstandard2.1\*.dll&quot; &quot;D:\Users\turbo\Unity\ChessGameProjectArt\Assets\Plugins\ChessGameClient&quot;" />
+  </Target>
+
+</Project>

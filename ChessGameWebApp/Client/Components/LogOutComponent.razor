@@ -1,0 +1,14 @@
+﻿@page "/logout"
+@using ChessGameClient.Services
+@inject IAuthService authService
+@inject NavigationManager navigationManager
+
+@code {
+
+    protected async override Task OnInitializedAsync()
+    {
+        await authService.LogOut();
+    }
+}
+
+<div></div>
